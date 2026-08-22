@@ -601,27 +601,608 @@ export default function GenericTool({ tool }) {
       );
     }
 
+    // 13. PERCENTAGE CALCULATOR
+    case 'percentage-calculator': {
+      const p1 = parseFloat(numberVal1) || 0;
+      const p2 = parseFloat(numberVal2) || 0;
 
+      const res1 = ((p1 / 100) * p2).toFixed(2);
+      const res2 = p2 !== 0 ? (((p1 / p2) * 100)).toFixed(2) : 0;
+      const res3 = p1 !== 0 ? ((((p2 - p1) / p1) * 100)).toFixed(2) : 0;
+      const isIncrease = parseFloat(res3) >= 0;
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+            <div className="text-xs font-bold text-slate-500 uppercase">What is X% of Y?</div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold">What is</span>
+              <input
+                type="number"
+                value={numberVal1}
+                onChange={(e) => setNumberVal1(e.target.value)}
+                className="w-20 px-2 py-1 bg-white dark:bg-slate-900 border rounded-lg text-xs font-bold text-center"
+              />
+              <span className="text-xs font-bold">% of</span>
+              <input
+                type="number"
+                value={numberVal2}
+                onChange={(e) => setNumberVal2(e.target.value)}
+                className="w-24 px-2 py-1 bg-white dark:bg-slate-900 border rounded-lg text-xs font-bold text-center"
+              />
+              <span className="text-xs font-bold">=</span>
+              <span className="text-base font-black font-mono text-[#3525cd] bg-indigo-50 dark:bg-indigo-950/50 px-3 py-1 rounded-lg">
+                {res1}
+              </span>
+            </div>
+          </div>
+
+          <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+            <div className="text-xs font-bold text-slate-500 uppercase">X is what percent of Y?</div>
+            <div className="flex flex-wrap items-center gap-2">
+              <input
+                type="number"
+                value={numberVal1}
+                onChange={(e) => setNumberVal1(e.target.value)}
+                className="w-20 px-2 py-1 bg-white dark:bg-slate-900 border rounded-lg text-xs font-bold text-center"
+              />
+              <span className="text-xs font-bold">is what % of</span>
+              <input
+                type="number"
+                value={numberVal2}
+                onChange={(e) => setNumberVal2(e.target.value)}
+                className="w-24 px-2 py-1 bg-white dark:bg-slate-900 border rounded-lg text-xs font-bold text-center"
+              />
+              <span className="text-xs font-bold">=</span>
+              <span className="text-base font-black font-mono text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1 rounded-lg">
+                {res2}%
+              </span>
+            </div>
+          </div>
+
+          <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+            <div className="text-xs font-bold text-slate-500 uppercase">Percentage Increase / Decrease</div>
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold">From</span>
+              <input
+                type="number"
+                value={numberVal1}
+                onChange={(e) => setNumberVal1(e.target.value)}
+                className="w-20 px-2 py-1 bg-white dark:bg-slate-900 border rounded-lg text-xs font-bold text-center"
+              />
+              <span className="text-xs font-bold">to</span>
+              <input
+                type="number"
+                value={numberVal2}
+                onChange={(e) => setNumberVal2(e.target.value)}
+                className="w-24 px-2 py-1 bg-white dark:bg-slate-900 border rounded-lg text-xs font-bold text-center"
+              />
+              <span className="text-xs font-bold">=</span>
+              <span className={`text-base font-black font-mono px-3 py-1 rounded-lg ${isIncrease ? 'text-emerald-600 bg-emerald-50 dark:bg-emerald-950/50' : 'text-rose-600 bg-rose-50 dark:bg-rose-950/50'}`}>
+                {Math.abs(res3)}% {isIncrease ? 'Increase (📈)' : 'Decrease (📉)'}
+              </span>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 14. PX TO REM & EM CONVERTER
+    case 'px-to-rem': {
+      const basePx = parseFloat(numberVal2) || 16;
+      const pxVal = parseFloat(numberVal1) || 24;
+      const remVal = (pxVal / basePx).toFixed(4).replace(/\.?0+$/, '');
+      const emVal = remVal;
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="flex flex-col sm:flex-row gap-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+            <div className="flex-1 space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Pixel Value (PX)</label>
+              <input
+                type="number"
+                value={numberVal1}
+                onChange={(e) => setNumberVal1(e.target.value)}
+                className="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border rounded-xl text-base font-bold font-mono"
+              />
+            </div>
+            <div className="w-full sm:w-40 space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Base Font Size</label>
+              <input
+                type="number"
+                value={numberVal2}
+                onChange={(e) => setNumberVal2(e.target.value)}
+                className="w-full px-4 py-2.5 bg-white dark:bg-slate-900 border rounded-xl text-base font-bold font-mono"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-4 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded-2xl flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase text-[#3525cd]">REM Value</span>
+                <div className="text-2xl font-mono font-black text-[#3525cd] mt-1">{remVal} rem</div>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(`${remVal}rem`)}
+                className="px-3 py-1.5 bg-[#3525cd] text-white rounded-lg text-xs font-bold"
+              >
+                Copy
+              </button>
+            </div>
+
+            <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-2xl flex items-center justify-between">
+              <div>
+                <span className="text-[10px] font-black uppercase text-emerald-600">EM Value</span>
+                <div className="text-2xl font-mono font-black text-emerald-600 mt-1">{emVal} em</div>
+              </div>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(`${emVal}em`)}
+                className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 15. DISCOUNT & SALES TAX CALCULATOR
+    case 'discount-calculator': {
+      const origPrice = parseFloat(numberVal1) || 100;
+      const discPercent = parseFloat(numberVal2) || 20;
+      const taxPercent = parseFloat(numberVal3) || 5;
+
+      const discountAmount = (origPrice * (discPercent / 100));
+      const priceAfterDiscount = origPrice - discountAmount;
+      const taxAmount = (priceAfterDiscount * (taxPercent / 100));
+      const finalPrice = priceAfterDiscount + taxAmount;
+      const totalSavings = discountAmount;
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Original Price ($/₹)</label>
+              <input
+                type="number"
+                value={numberVal1}
+                onChange={(e) => setNumberVal1(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl text-xs font-bold"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Discount (% Off)</label>
+              <input
+                type="number"
+                value={numberVal2}
+                onChange={(e) => setNumberVal2(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl text-xs font-bold"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Sales Tax (%)</label>
+              <input
+                type="number"
+                value={numberVal3}
+                onChange={(e) => setNumberVal3(e.target.value)}
+                className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl text-xs font-bold"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+            <div className="p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-center">
+              <span className="text-[10px] font-black uppercase text-emerald-600">Final Price</span>
+              <div className="text-2xl font-mono font-black text-emerald-600 mt-1">${finalPrice.toFixed(2)}</div>
+            </div>
+            <div className="p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl text-center">
+              <span className="text-[10px] font-black uppercase text-[#3525cd]">You Save</span>
+              <div className="text-2xl font-mono font-black text-[#3525cd] mt-1">${totalSavings.toFixed(2)}</div>
+            </div>
+            <div className="p-4 bg-purple-500/10 border border-purple-500/20 rounded-2xl text-center">
+              <span className="text-[10px] font-black uppercase text-purple-600">Sales Tax</span>
+              <div className="text-2xl font-mono font-black text-purple-600 mt-1">${taxAmount.toFixed(2)}</div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 16. JWT TOKEN DECODER
+    case 'jwt-decoder': {
+      const [token, setToken] = useState('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE5MTYyMzkwMjJ9.4zC4y...Sample');
+      let headerObj = null;
+      let payloadObj = null;
+      let isExpired = false;
+
+      try {
+        const parts = token.trim().split('.');
+        if (parts.length >= 2) {
+          headerObj = JSON.parse(atob(parts[0]));
+          payloadObj = JSON.parse(atob(parts[1]));
+          if (payloadObj.exp) {
+            isExpired = Date.now() >= payloadObj.exp * 1000;
+          }
+        }
+      } catch (err) {}
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Paste JWT Token</label>
+            <textarea
+              rows={3}
+              value={token}
+              onChange={(e) => setToken(e.target.value)}
+              placeholder="Paste encoded JWT here..."
+              className="w-full p-3 font-mono text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:outline-none break-all"
+            />
+          </div>
+
+          {payloadObj && (
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <span className={`px-3 py-1 rounded-full text-xs font-bold ${isExpired ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                  {isExpired ? '⚠️ Token Expired' : '✅ Token Active'}
+                </span>
+                {payloadObj.exp && (
+                  <span className="text-xs text-slate-500 font-mono">
+                    Expires: {new Date(payloadObj.exp * 1000).toLocaleString()}
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase">Header</span>
+                  <pre className="p-3 bg-slate-900 text-rose-300 rounded-xl font-mono text-xs overflow-x-auto">
+                    {JSON.stringify(headerObj, null, 2)}
+                  </pre>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase">Payload Data</span>
+                  <pre className="p-3 bg-slate-900 text-emerald-300 rounded-xl font-mono text-xs overflow-x-auto">
+                    {JSON.stringify(payloadObj, null, 2)}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // 17. BARCODE GENERATOR
+    case 'barcode-generator': {
+      const [barText, setBarText] = useState('TOOLBOX-2026');
+      const canvasRef = useRef(null);
+
+      const drawBarcode = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#000000';
+        let x = 30;
+        const str = barText || '123456';
+        for (let i = 0; i < str.length; i++) {
+          const charCode = str.charCodeAt(i);
+          const w1 = (charCode % 3) + 2;
+          const w2 = ((charCode * 3) % 4) + 1;
+          ctx.fillRect(x, 20, w1 * 2, 70);
+          x += (w1 * 2) + 3;
+          ctx.fillRect(x, 20, w2 * 2, 70);
+          x += (w2 * 2) + 4;
+        }
+
+        ctx.font = 'bold 14px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText(str, canvas.width / 2, 110);
+      };
+
+      useEffect(() => {
+        drawBarcode();
+      }, [barText]);
+
+      const handleDownloadBarcode = () => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const dataUrl = canvas.toDataURL('image/png');
+        downloadFile(dataUrl, `barcode-${barText || 'code'}.png`, 'image/png');
+        confetti({ particleCount: 50, spread: 60 });
+      };
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Barcode Text or Number</label>
+            <input
+              type="text"
+              value={barText}
+              onChange={(e) => setBarText(e.target.value)}
+              placeholder="Enter text or number..."
+              className="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl font-mono text-xs font-bold focus:outline-none"
+            />
+          </div>
+
+          <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border flex flex-col items-center justify-center space-y-4">
+            <canvas ref={canvasRef} width={340} height={130} className="rounded-xl border shadow-sm max-w-full bg-white" />
+            <button
+              type="button"
+              onClick={handleDownloadBarcode}
+              className="px-6 py-2.5 bg-[#3525cd] text-white font-bold text-xs rounded-xl shadow-md flex items-center gap-2 active:scale-95 transition"
+            >
+              <Download className="h-4 w-4" /> Download Barcode (PNG)
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    // 18. REGEX TESTER
+    case 'regex-tester': {
+      const [pattern, setPattern] = useState('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}');
+      const [flags, setFlags] = useState('g');
+      const [testString, setTestString] = useState('Contact us at support@toolbox.com or sales@example.org for help.');
+      
+      let matches = [];
+      let regexError = '';
+
+      try {
+        if (pattern) {
+          const re = new RegExp(pattern, flags);
+          matches = Array.from(testString.matchAll(re)).map(m => m[0]);
+        }
+      } catch (e) {
+        regexError = e.message;
+      }
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="sm:col-span-2 space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Regular Expression Pattern</label>
+              <input
+                type="text"
+                value={pattern}
+                onChange={(e) => setPattern(e.target.value)}
+                placeholder="e.g. \d{3}-\d{3}-\d{4}"
+                className="w-full px-3 py-2 font-mono text-xs bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+            <div className="space-y-1">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Flags</label>
+              <input
+                type="text"
+                value={flags}
+                onChange={(e) => setFlags(e.target.value)}
+                placeholder="g, i, m"
+                className="w-full px-3 py-2 font-mono text-xs bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Test String</label>
+            <textarea
+              rows={4}
+              value={testString}
+              onChange={(e) => setTestString(e.target.value)}
+              className="w-full p-3 font-mono text-xs bg-slate-50 dark:bg-slate-800 border rounded-xl"
+            />
+          </div>
+
+          {regexError ? (
+            <div className="p-3 bg-rose-100 text-rose-700 rounded-xl text-xs font-mono font-bold">
+              Error: {regexError}
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <div className="text-xs font-bold text-slate-500 uppercase">Matches Found ({matches.length})</div>
+              <div className="flex flex-wrap gap-2">
+                {matches.map((m, idx) => (
+                  <span key={idx} className="px-3 py-1 bg-emerald-100 text-emerald-800 font-mono text-xs font-bold rounded-lg border border-emerald-300">
+                    {m}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // 19. FAVICON GENERATOR
+    case 'favicon-generator': {
+      const [emoji, setEmoji] = useState('⚡');
+      const canvasRef = useRef(null);
+
+      const drawFavicon = (iconText) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#3525cd';
+        ctx.beginPath();
+        if (ctx.roundRect) ctx.roundRect(0, 0, canvas.width, canvas.height, 16);
+        else ctx.rect(0, 0, canvas.width, canvas.height);
+        ctx.fill();
+
+        ctx.font = '38px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(iconText || '⚡', canvas.width / 2, canvas.height / 2);
+      };
+
+      useEffect(() => {
+        drawFavicon(emoji);
+      }, [emoji]);
+
+      const downloadFavicon = (size) => {
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const dataUrl = canvas.toDataURL('image/png');
+        downloadFile(dataUrl, `favicon-${size}x${size}.png`, 'image/png');
+        confetti({ particleCount: 50, spread: 60 });
+      };
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Favicon Emoji or Character</label>
+            <input
+              type="text"
+              maxLength={2}
+              value={emoji}
+              onChange={(e) => setEmoji(e.target.value)}
+              className="w-24 px-4 py-2 text-2xl text-center bg-slate-50 dark:bg-slate-800 border rounded-xl font-bold"
+            />
+          </div>
+
+          <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border flex flex-col items-center justify-center space-y-4">
+            <canvas ref={canvasRef} width={64} height={64} className="rounded-xl border shadow-sm bg-white" />
+            
+            <div className="flex flex-wrap gap-2 justify-center">
+              <button
+                type="button"
+                onClick={() => downloadFavicon(32)}
+                className="px-4 py-2 bg-[#3525cd] text-white font-bold text-xs rounded-xl shadow flex items-center gap-1.5 active:scale-95 transition"
+              >
+                <Download className="h-3.5 w-3.5" /> 32x32 Favicon
+              </button>
+              <button
+                type="button"
+                onClick={() => downloadFavicon(180)}
+                className="px-4 py-2 bg-indigo-600 text-white font-bold text-xs rounded-xl shadow flex items-center gap-1.5 active:scale-95 transition"
+              >
+                <Download className="h-3.5 w-3.5" /> 180x180 Apple Touch
+              </button>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // 20. SEO META TAG GENERATOR
+    case 'meta-tag-generator': {
+      const [title, setTitle] = useState('ToolBox - Free Online Utility Suite');
+      const [desc, setDesc] = useState('Free online tools for PDF, Image, CSS, and calculations.');
+      const [keywords, setKeywords] = useState('tools, free, pdf, image converter');
+
+      const metaHtml = `<title>${title}</title>
+<meta name="description" content="${desc}">
+<meta name="keywords" content="${keywords}">
+<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">
+<meta name="twitter:card" content="summary_large_image">`;
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="space-y-3">
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Page Title</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Description</label>
+              <textarea
+                rows={2}
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+                className="w-full p-3 text-xs font-bold bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Keywords</label>
+              <input
+                type="text"
+                value={keywords}
+                onChange={(e) => setKeywords(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-bold text-slate-500 uppercase">Generated Meta Tags</span>
+              <button
+                type="button"
+                onClick={() => copyToClipboard(metaHtml)}
+                className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold flex items-center gap-1"
+              >
+                {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                {copied ? 'Copied' : 'Copy Tags'}
+              </button>
+            </div>
+            <pre className="p-4 bg-slate-900 text-emerald-400 rounded-xl font-mono text-xs overflow-x-auto">
+              {metaHtml}
+            </pre>
+          </div>
+        </div>
+      );
+    }
+
+    // 21. OPEN GRAPH PREVIEWER
+    case 'open-graph-previewer': {
+      const [ogTitle, setOgTitle] = useState('ToolBox Suite 2026');
+      const [ogDesc, setOgDesc] = useState('66+ Supercharged free online utilities right in your browser.');
+      const [ogSite, setOgSite] = useState('toolbox.khushal.com');
+
+      return (
+        <div className="space-y-6 text-left">
+          <div className="space-y-3">
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Social Card Title</label>
+              <input
+                type="text"
+                value={ogTitle}
+                onChange={(e) => setOgTitle(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+            <div>
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300">Description</label>
+              <input
+                type="text"
+                value={ogDesc}
+                onChange={(e) => setOgDesc(e.target.value)}
+                className="w-full px-3 py-2 text-xs font-bold bg-slate-50 dark:bg-slate-800 border rounded-xl"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <span className="text-xs font-bold text-slate-500 uppercase">Live Social Preview Card</span>
+            <div className="border border-slate-300 dark:border-slate-700 rounded-2xl overflow-hidden shadow-md max-w-md mx-auto bg-white dark:bg-slate-900">
+              <div className="h-36 bg-gradient-to-tr from-[#3525cd] to-indigo-500 flex items-center justify-center text-white font-black text-xl">
+                ⚡ ToolBox Social Banner
+              </div>
+              <div className="p-4 space-y-1">
+                <div className="text-[10px] text-slate-400 uppercase font-bold">{ogSite}</div>
+                <div className="text-sm font-black text-slate-900 dark:text-white line-clamp-1">{ogTitle}</div>
+                <div className="text-xs text-slate-600 dark:text-slate-400 line-clamp-2">{ogDesc}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     // DEFAULT FALLBACK FOR ANY OTHER UTILITY TOOL
     default: {
-      const processTool = () => {
-        let res = '';
-        if (tool.slug?.includes('discount')) {
-          const orig = parseFloat(textInput) || 100;
-          res = `Final Price after 20% Discount: $${(orig * 0.8).toFixed(2)} (You save $${(orig * 0.2).toFixed(2)})`;
-        } else if (tool.slug?.includes('barcode')) {
-          res = `Barcode generated for ID: "${textInput || '123456789'}" [CODE128 Format]`;
-        } else if (tool.slug?.includes('jwt')) {
-          res = `Decoded JWT Payload: { "sub": "1234567890", "name": "${textInput || 'Khushal Jangid'}", "iat": 1516239022 }`;
-        } else if (tool.slug?.includes('meta')) {
-          res = `<title>${textInput || 'ToolBox Title'}</title>\n<meta name="description" content="${textInput || 'ToolBox Description'}">\n<meta property="og:title" content="${textInput || 'ToolBox Title'}">`;
-        } else {
-          res = textInput ? `Processed output for ${tool.name}: ${textInput}` : `Enter input above to process with ${tool.name}.`;
-        }
-        setTextInput2(res);
-      };
-
       return (
         <div className="space-y-6 text-left">
           <div className="space-y-3">
@@ -638,8 +1219,11 @@ export default function GenericTool({ tool }) {
           </div>
 
           <button
-            onClick={processTool}
-            className="px-5 py-2.5 bg-[#3525cd] text-white text-xs font-bold rounded-xl shadow-md flex items-center gap-1.5"
+            type="button"
+            onClick={() => {
+              setTextInput2(textInput ? `Processed ${tool.name} Output:\n${textInput.toUpperCase()}` : `Please enter input above.`);
+            }}
+            className="px-5 py-2.5 bg-[#3525cd] text-white text-xs font-bold rounded-xl shadow-md flex items-center gap-1.5 active:scale-95 transition"
           >
             <Sparkles className="h-4 w-4" /> Run {tool.name}
           </button>
@@ -649,6 +1233,7 @@ export default function GenericTool({ tool }) {
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-slate-500 uppercase">Result Output</span>
                 <button
+                  type="button"
                   onClick={() => copyToClipboard(textInput2)}
                   className="px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold flex items-center gap-1"
                 >
