@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './components/HomePage';
 import ToolPage from './components/ToolPage';
+import DownloadAppPage from './components/DownloadAppPage';
 import QuickSearchModal from './components/QuickSearchModal';
 import MobileBottomNav from './components/MobileBottomNav';
 import { TOOLS_REGISTRY } from './data/toolsRegistry';
@@ -41,7 +42,9 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash.replace('#', '');
-      if (hash.startsWith('/tools/')) {
+      if (hash === 'download' || hash === '/download' || hash === 'download-app') {
+        setRoute({ page: 'download', slug: null });
+      } else if (hash.startsWith('/tools/')) {
         const slug = hash.replace('/tools/', '');
         setRoute({ page: 'tool', slug });
       } else {
@@ -55,7 +58,10 @@ export default function App() {
   }, []);
 
   const navigate = (page, slug = null, catFilter = 'all') => {
-    if (page === 'tool' && slug) {
+    if (page === 'download') {
+      window.location.hash = '/download';
+      setRoute({ page: 'download', slug: null });
+    } else if (page === 'tool' && slug) {
       window.location.hash = `/tools/${slug}`;
       setRoute({ page: 'tool', slug });
     } else {
@@ -88,7 +94,9 @@ export default function App() {
       />
 
       <main className="flex-1">
-        {route.page === 'tool' && route.slug ? (
+        {route.page === 'download' ? (
+          <DownloadAppPage onNavigate={navigate} />
+        ) : route.page === 'tool' && route.slug ? (
           <ToolPage
             toolSlug={route.slug}
             onNavigate={navigate}
