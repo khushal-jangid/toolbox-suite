@@ -9,18 +9,18 @@ export default function DownloadAppPage({ onNavigate }) {
   const [copied, setCopied] = useState(false);
 
   // Direct APK download link
-  const apkDownloadUrl = "/ToolBox-v1.0.apk";
-  const repoReleasesUrl = "https://github.com/khushal-jangid/toolbox-suite/actions";
+  const apkDownloadUrl = "https://khushal-jangid.github.io/toolbox-suite/ToolBox-v1.0.apk";
+  const repoReleasesUrl = "https://github.com/khushal-jangid/toolbox-suite/releases/tag/v1.0.0";
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: "Download ToolBox Suite Android App",
         text: "Get 66+ Free PDF, Image, Code & Calculator tools on your Android phone!",
-        url: window.location.href,
+        url: "https://khushal-jangid.github.io/toolbox-suite/#download",
       }).catch(() => {});
     } else {
-      navigator.clipboard.writeText(window.location.href);
+      navigator.clipboard.writeText("https://khushal-jangid.github.io/toolbox-suite/#download");
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -80,14 +80,14 @@ export default function DownloadAppPage({ onNavigate }) {
                 🔒 100% Private Client-Side
               </span>
               <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-xl text-xs font-black text-slate-900 dark:text-slate-100 shadow-[2px_2px_0px_0px_#0f172a]">
-                ⚡ Tiny Size: ~12 MB
+                ⚡ Tiny Size: 4.75 MB
               </span>
             </div>
 
             {/* Direct Download Call To Actions */}
             <div className="pt-3 flex flex-col sm:flex-row gap-3">
               <a
-                href="./ToolBox-v1.0.apk"
+                href={apkDownloadUrl}
                 download="ToolBox-v1.0.apk"
                 className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none transition cursor-pointer"
               >
@@ -96,11 +96,12 @@ export default function DownloadAppPage({ onNavigate }) {
               </a>
 
               <a
-                href="https://khushal-jangid.github.io/toolbox-suite/ToolBox-v1.0.apk"
-                download="ToolBox-v1.0.apk"
+                href={repoReleasesUrl}
+                target="_blank"
+                rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition cursor-pointer"
               >
-                <span>Mirror Link ➔</span>
+                <span>GitHub Releases ➔</span>
               </a>
             </div>
           </div>
@@ -115,7 +116,7 @@ export default function DownloadAppPage({ onNavigate }) {
               
               <div className="flex items-center justify-center py-1">
                 <img
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(window.location.href)}`}
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(apkDownloadUrl)}`}
                   alt="Scan to Download APK"
                   className="w-36 h-36 border-2 border-slate-900 rounded-xl p-1 bg-white"
                 />
@@ -123,10 +124,10 @@ export default function DownloadAppPage({ onNavigate }) {
 
               <div className="bg-yellow-300 text-slate-950 p-2 rounded-xl border border-slate-900 shadow-xs">
                 <span className="text-xs font-black block">
-                  Scan from Phone Camera 📷
+                  Scan to Download APK 📷
                 </span>
                 <span className="text-[9px] font-bold block opacity-90">
-                  Instantly open & install on mobile
+                  Point phone camera & download instantly
                 </span>
               </div>
             </div>
