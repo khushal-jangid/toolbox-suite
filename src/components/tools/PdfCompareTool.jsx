@@ -125,9 +125,22 @@ export default function PdfCompareTool() {
       {/* Side-by-Side Result */}
       {(textA || textB) && (
         <div className="space-y-3">
-          <span className="text-xs font-bold text-slate-500 uppercase flex items-center gap-1.5">
-            <CheckCircle2 className="h-4 w-4 text-emerald-500" /> Comparison Content Output
-          </span>
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold text-slate-500 uppercase flex items-center gap-1.5">
+              <CheckCircle2 className="h-4 w-4 text-emerald-500" /> Comparison Content Output
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                const report = `PDF COMPARISON REPORT\n====================\n\n[DOCUMENT A: ${fileA?.name}]\n${textA}\n\n====================\n\n[DOCUMENT B: ${fileB?.name}]\n${textB}`;
+                const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+                downloadFile(blob, `pdf-comparison-${fileA?.name.replace('.pdf', '')}-vs-${fileB?.name.replace('.pdf', '')}.txt`, 'text/plain');
+              }}
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow transition"
+            >
+              Download Report (.txt)
+            </button>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl space-y-2">
