@@ -87,23 +87,21 @@ export default function DownloadAppPage({ onNavigate }) {
             {/* Direct Download Call To Actions */}
             <div className="pt-3 flex flex-col sm:flex-row gap-3">
               <a
-                href={apkDownloadUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none transition"
+                href="./ToolBox-v1.0.apk"
+                download="ToolBox-v1.0.apk"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none transition cursor-pointer"
               >
                 <Download className="h-6 w-6 stroke-[2.5]" />
-                <span>Download APK via GitHub</span>
+                <span>Download APK (Direct 1-Click)</span>
               </a>
 
-              <button
-                onClick={() => {
-                  alert("To install directly in Chrome on Android: Tap the 3 dots (⋮) menu in Chrome > select Install App / Add to Home screen!");
-                }}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition"
+              <a
+                href="https://khushal-jangid.github.io/toolbox-suite/ToolBox-v1.0.apk"
+                download="ToolBox-v1.0.apk"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition cursor-pointer"
               >
-                <span>📲 Instant Web Install</span>
-              </button>
+                <span>Mirror Link ➔</span>
+              </a>
             </div>
           </div>
 
