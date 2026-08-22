@@ -59,17 +59,6 @@ export default function Header({ onNavigate, onOpenSearch, activeCategory, onOpe
         {/* Search Bar & Action Controls */}
         <div className="flex items-center gap-2 sm:gap-3">
           
-          {/* Download APK Button */}
-          <button
-            onClick={() => onNavigate('download')}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-xs border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] transition active:scale-95 cursor-pointer"
-            title="Download Android APK App"
-          >
-            <span>📲</span>
-            <span className="hidden sm:inline">Get APK</span>
-            <span className="sm:hidden">APK</span>
-          </button>
-
           {/* Quick Search Input */}
           <div
             onClick={onOpenSearch}

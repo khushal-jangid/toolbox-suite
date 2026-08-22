@@ -275,6 +275,53 @@ export default function HomePage({ onNavigate, activeCategoryFilter, favorites =
             </div>
           )}
         </section>
+
+        {/* Bottom Paper Banner: Android App Download */}
+        <section className="bg-[#fffbeb] dark:bg-[#1a160d] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-5 sm:p-8 shadow-[6px_6px_0px_0px_#0f172a] dark:shadow-[6px_6px_0px_0px_#000] relative overflow-hidden bg-paper-dots mt-10">
+          <div className="absolute -top-3 left-6 bg-yellow-400 text-slate-950 px-4 py-0.5 text-[10px] font-black uppercase tracking-wider border-2 border-slate-900 shadow-xs rotate-1 z-10">
+            📌 OFFICIAL ANDROID APP
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pt-2">
+            <div className="md:col-span-8 space-y-2 text-left">
+              <div className="flex items-center gap-2">
+                <span className="text-xl sm:text-2xl">📱</span>
+                <h3 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">
+                  Get <span className="bg-yellow-300 text-slate-950 px-2 py-0.5 rounded-lg border-2 border-slate-900 inline-block shadow-[2px_2px_0px_0px_#0f172a] -rotate-1">ToolBox</span> on your Phone!
+                </h3>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium">
+                Carry all 66+ PDF, image, code, and calculator utilities in your pocket with zero ads, offline support, and 100% privacy.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <span className="text-[11px] font-black bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-900 text-slate-900 dark:text-slate-100">
+                  ✨ 100% Free
+                </span>
+                <span className="text-[11px] font-black bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-900 text-slate-900 dark:text-slate-100">
+                  ⚡ 4.75 MB
+                </span>
+                <span className="text-[11px] font-black bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-900 text-slate-900 dark:text-slate-100">
+                  🔒 No Server Uploads
+                </span>
+              </div>
+            </div>
+
+            <div className="md:col-span-4 flex flex-col sm:flex-row md:flex-col gap-2.5 justify-center">
+              <button
+                onClick={() => onNavigate('download')}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition cursor-pointer"
+              >
+                <span>📲 Download APK (4.75 MB)</span>
+              </button>
+              <button
+                onClick={() => onNavigate('download')}
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-bold text-xs border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition cursor-pointer"
+              >
+                <span>Scan QR on Mobile ➔</span>
+              </button>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
