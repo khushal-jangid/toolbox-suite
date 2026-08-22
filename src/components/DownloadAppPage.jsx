@@ -8,9 +8,9 @@ import {
 export default function DownloadAppPage({ onNavigate }) {
   const [copied, setCopied] = useState(false);
 
-  // GitHub Actions Artifacts / Release link
-  const apkDownloadUrl = "https://github.com/khushal-jangid/toolbox-suite/actions";
-  const repoReleasesUrl = "https://github.com/khushal-jangid/toolbox-suite/releases";
+  // Direct APK download link
+  const apkDownloadUrl = "/ToolBox-v1.0.apk";
+  const repoReleasesUrl = "https://github.com/khushal-jangid/toolbox-suite/actions";
 
   const handleShare = () => {
     if (navigator.share) {
