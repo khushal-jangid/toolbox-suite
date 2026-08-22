@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { Video, Download, ExternalLink, Image as ImageIcon } from 'lucide-react';
 import confetti from 'canvas-confetti';

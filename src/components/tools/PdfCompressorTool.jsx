@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, FileDown, Download, RefreshCw, CheckCircle2, Sliders, Shield } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
@@ -253,13 +254,11 @@ export default function PdfCompressorTool() {
                 >
                   Compress Another PDF
                 </button>
-                <a
-                  href={compressedPdfUrl}
-                  download={`${file.name.replace('.pdf', '')}-compressed.pdf`}
+                <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(compressedPdfUrl, `${file.name.replace('.pdf', '')}-compressed.pdf`, "application/pdf"); }}  
                   className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
                 >
                   <Download className="h-4 w-4" /> Download Compressed PDF
-                </a>
+                </button>
               </div>
             </div>
           )}

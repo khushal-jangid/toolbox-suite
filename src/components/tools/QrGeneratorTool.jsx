@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useEffect, useRef } from 'react';
 import { QrCode, Download, Copy, Check, Sparkles, Globe, Wifi, Mail, Phone, Type } from 'lucide-react';
 import QRCode from 'qrcode';

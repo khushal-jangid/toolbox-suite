@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { ShoppingBag, CheckCircle, Scale, Tag } from 'lucide-react';
 

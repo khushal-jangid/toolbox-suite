@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, FileImage, Download, RefreshCw, Check, Layers } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';

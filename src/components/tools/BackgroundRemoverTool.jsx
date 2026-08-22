@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, Wand2, Download, RefreshCw, Eye, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -81,10 +82,8 @@ export default function BackgroundRemoverTool() {
 
   const handleDownload = () => {
     if (!resultUrl) return;
-    const a = document.createElement('a');
-    a.href = resultUrl;
-    a.download = 'transparent-background.png';
-    a.click();
+    const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+    downloadFile(resultUrl, `${nameWithoutExt}-no-bg.png`, "image/png");
     confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
   };
 

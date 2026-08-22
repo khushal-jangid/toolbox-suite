@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { Flame, HeartPulse, Activity, Scale } from 'lucide-react';
 

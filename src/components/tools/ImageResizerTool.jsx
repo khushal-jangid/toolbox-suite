@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Scaling, Lock, Unlock, RefreshCw } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -89,11 +90,9 @@ export default function ImageResizerTool() {
 
   const handleDownload = () => {
     if (!resizedUrl) return;
-    const a = document.createElement('a');
-    a.href = resizedUrl;
-    const ext = format === 'image/png' ? 'png' : format === 'image/webp' ? 'webp' : 'jpg';
-    a.download = `resized-${targetWidth}x${targetHeight}.${ext}`;
-    a.click();
+    const ext = format === "image/jpeg" ? "jpg" : format === "image/webp" ? "webp" : "png";
+    const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+    downloadFile(resizedUrl, `${nameWithoutExt}-resized.${ext}`, format);
     confetti({ particleCount: 50, spread: 50, origin: { y: 0.8 } });
   };
 

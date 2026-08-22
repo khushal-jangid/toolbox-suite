@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, FileImage, Download, Trash2, ArrowUp, ArrowDown, RefreshCw, CheckCircle2, Sliders } from 'lucide-react';
 import { PDFDocument, rgb } from 'pdf-lib';
@@ -283,13 +284,11 @@ export default function ImageToPdfTool() {
                 >
                   Edit Pages
                 </button>
-                <a
-                  href={generatedPdfUrl}
-                  download="images-combined.pdf"
+                <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(generatedPdfUrl, "images-combined.pdf", "application/pdf"); }}  
                   className="flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition"
                 >
                   <Download className="h-4 w-4" /> Download PDF Document
-                </a>
+                </button>
               </div>
             )}
           </div>

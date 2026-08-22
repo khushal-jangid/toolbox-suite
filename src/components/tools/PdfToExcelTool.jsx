@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, FileSpreadsheet, Download, Copy, Check, RefreshCw, CheckCircle2, Table } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';

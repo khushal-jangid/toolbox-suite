@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef, useEffect } from 'react';
 import { Crop, Upload, Download, RotateCw, RotateCcw, FlipHorizontal, FlipVertical, RefreshCw, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -402,13 +403,11 @@ export default function ImageCropperTool() {
                 <span className="text-xs font-bold text-emerald-600 flex items-center gap-1.5">
                   <CheckCircle2 className="h-4 w-4" /> Cropped Image Ready ({cropDimensions.width} × {cropDimensions.height} px)
                 </span>
-                <a
-                  href={croppedUrl}
-                  download={`${imageName}-cropped.png`}
+                <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(croppedUrl, `${imageName}-cropped.png`, "image/png"); }}  
                   className="flex items-center gap-1.5 px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl shadow-md transition"
                 >
                   <Download className="h-3.5 w-3.5" /> Download PNG
-                </a>
+                </button>
               </div>
               <div className="p-4 bg-slate-50 dark:bg-slate-950 rounded-xl flex justify-center max-h-72 overflow-hidden">
                 <img src={croppedUrl} alt="Cropped Result" className="max-h-64 object-contain rounded" />

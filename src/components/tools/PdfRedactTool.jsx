@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, EyeOff, Download, RefreshCw, CheckCircle2, ShieldAlert, Plus, Trash2 } from 'lucide-react';
 import { PDFDocument, rgb } from 'pdf-lib';
@@ -155,13 +156,11 @@ export default function PdfRedactTool() {
               <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold text-xs">
                 <CheckCircle2 className="h-4 w-4" /> Redactions Applied Permanently!
               </div>
-              <a
-                href={resultPdfUrl}
-                download={`${file.name.replace('.pdf', '')}-redacted.pdf`}
+              <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(resultPdfUrl, `${file.name.replace('.pdf', '')}-redacted.pdf`, "application/pdf"); }}  
                 className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
               >
                 <Download className="h-3.5 w-3.5" /> Download Redacted PDF
-              </a>
+              </button>
             </div>
           )}
         </div>

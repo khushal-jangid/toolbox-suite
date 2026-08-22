@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Copy, Check, RefreshCw, Sparkles, Code, Play, Eye, Download, 

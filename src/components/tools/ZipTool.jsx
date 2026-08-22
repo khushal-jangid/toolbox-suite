@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Archive, Upload, Download, FileText, Trash2, Plus, CheckCircle2, FolderArchive, RefreshCw } from 'lucide-react';
 import JSZip from 'jszip';

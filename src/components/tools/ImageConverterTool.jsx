@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, ArrowRightLeft, Download, RefreshCw, CheckCircle2, Sliders, Trash2 } from 'lucide-react';
 import JSZip from 'jszip';
@@ -232,13 +233,11 @@ export default function ImageConverterTool() {
                       </div>
                       <div className="flex items-center justify-between text-[11px]">
                         <span className="text-slate-400 font-mono">{formatBytes(item.size)}</span>
-                        <a
-                          href={item.url}
-                          download={item.name}
+                        <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(item.url, item.name, "application/pdf"); }}  
                           className="px-3 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-emerald-600 hover:text-white rounded-lg font-bold transition flex items-center gap-1 text-xs"
                         >
                           <Download className="h-3.5 w-3.5" /> Save
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>

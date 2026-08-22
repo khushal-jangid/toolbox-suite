@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { ArrowLeftRight, Copy, Check } from 'lucide-react';
 

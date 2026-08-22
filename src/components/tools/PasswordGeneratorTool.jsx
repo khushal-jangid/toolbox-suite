@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useEffect } from 'react';
 import { KeyRound, Copy, RefreshCw, Check, ShieldCheck, ShieldAlert } from 'lucide-react';
 import confetti from 'canvas-confetti';

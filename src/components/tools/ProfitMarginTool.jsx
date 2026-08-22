@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { DollarSign, TrendingUp, Percent, ArrowUpRight } from 'lucide-react';
 

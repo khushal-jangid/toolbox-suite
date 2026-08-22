@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Presentation, Download, RefreshCw, CheckCircle2, Layers } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
@@ -160,13 +161,11 @@ export default function PdfToPptTool() {
                     </div>
                     <div className="flex items-center justify-between text-xs pt-1">
                       <span className="font-bold text-slate-700 dark:text-slate-300">Slide #{slide.pageNumber}</span>
-                      <a
-                        href={slide.dataUrl}
-                        download={`slide-${slide.pageNumber}.png`}
+                      <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(slide.dataUrl, `slide-${slide.pageNumber}.png`, "image/png"); }}  
                         className="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 hover:bg-amber-600 hover:text-white rounded-lg font-bold transition flex items-center gap-1 text-[11px]"
                       >
                         <Download className="h-3 w-3" /> Save Slide
-                      </a>
+                      </button>
                     </div>
                   </div>
                 ))}

@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, RotateCcw, Bell, Sparkles, Check, Volume2, VolumeX } from 'lucide-react';
 import confetti from 'canvas-confetti';

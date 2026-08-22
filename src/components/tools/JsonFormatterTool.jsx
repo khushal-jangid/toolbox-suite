@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { Braces, Copy, Download, Trash2, Check, AlertTriangle, Minimize2, Maximize2 } from 'lucide-react';
 import confetti from 'canvas-confetti';

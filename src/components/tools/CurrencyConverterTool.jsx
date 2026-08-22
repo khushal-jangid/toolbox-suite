@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useEffect } from 'react';
 import { ArrowLeftRight, Coins, RefreshCw, TrendingUp, DollarSign } from 'lucide-react';
 

@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useEffect } from 'react';
 import { Calculator, Delete, RotateCcw, Copy, Check } from 'lucide-react';
 

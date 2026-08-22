@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, FileText, Download, Trash2, ArrowUp, ArrowDown, RefreshCw, CheckCircle2 } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
@@ -205,14 +206,12 @@ export default function PdfMergerTool() {
                 )}
               </button>
             ) : (
-              <a
-                href={mergedPdfUrl}
-                download="merged-document.pdf"
+              <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(mergedPdfUrl, "merged-document.pdf", "application/pdf"); }}  
                 className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold rounded-xl bg-emerald-600 text-white shadow-md hover:bg-emerald-700 transition"
               >
                 <Download className="h-4 w-4" />
                 Download Merged PDF
-              </a>
+              </button>
             )}
           </div>
         </div>

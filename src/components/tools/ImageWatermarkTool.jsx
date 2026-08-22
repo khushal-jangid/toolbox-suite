@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef, useEffect } from 'react';
 import { Upload, Download, Type, Sliders, Image as ImageIcon, Sparkles } from 'lucide-react';
 

@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, Wrench, Download, RefreshCw, CheckCircle2, ShieldCheck, AlertCircle } from 'lucide-react';
 import { PDFDocument } from 'pdf-lib';
@@ -127,13 +128,11 @@ export default function PdfRepairTool() {
               <div className="flex items-center gap-2 text-emerald-700 dark:text-emerald-300 font-bold text-xs">
                 <ShieldCheck className="h-4 w-4" /> PDF Reconstructed & Repaired Successfully!
               </div>
-              <a
-                href={resultPdfUrl}
-                download={`${file.name.replace('.pdf', '')}-repaired.pdf`}
+              <button type="button" onClick={(e) => { e.preventDefault(); downloadFile(resultPdfUrl, `${file.name.replace('.pdf', '')}-repaired.pdf`, "application/pdf"); }}  
                 className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md transition flex items-center gap-1.5"
               >
                 <Download className="h-3.5 w-3.5" /> Download Repaired PDF
-              </a>
+              </button>
             </div>
           )}
         </div>

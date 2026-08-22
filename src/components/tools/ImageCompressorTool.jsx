@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState, useRef } from 'react';
 import { Upload, Download, Image as ImageIcon, Sliders, RefreshCw, CheckCircle2, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -79,14 +80,9 @@ export default function ImageCompressorTool() {
 
   const handleDownload = () => {
     if (!compressedUrl) return;
-    const a = document.createElement('a');
-    a.href = compressedUrl;
-    const ext = format === 'image/jpeg' ? 'jpg' : format === 'image/webp' ? 'webp' : 'png';
-    const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
-    a.download = `${nameWithoutExt}-compressed.${ext}`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    const ext = format === "image/jpeg" ? "jpg" : format === "image/webp" ? "webp" : "png";
+    const nameWithoutExt = file.name.substring(0, file.name.lastIndexOf(".")) || file.name;
+    downloadFile(compressedUrl, `${nameWithoutExt}-compressed.${ext}`, format);
     confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
   };
 

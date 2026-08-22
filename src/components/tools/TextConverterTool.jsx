@@ -1,3 +1,4 @@
+import { downloadFile } from "../../utils/fileDownloader";
 import React, { useState } from 'react';
 import { CaseSensitive, Copy, Check, RefreshCw } from 'lucide-react';
 
