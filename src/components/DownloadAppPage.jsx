@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import { 
   Download, QrCode, Smartphone, ShieldCheck, Zap, Sparkles, CheckCircle2,
-  ArrowLeft, FileText, Image, Code2, Lock, ArrowRight, Share2, Star, Check
+  ArrowLeft, FileText, Image, Code2, Lock, ArrowRight, Share2, Star, Check,
+  Award, Heart, Terminal, Compass, Layers, CheckSquare
 } from "lucide-react";
 
 export default function DownloadAppPage({ onNavigate }) {
   const [copied, setCopied] = useState(false);
 
-  // GitHub Release / Direct Artifact APK link
-  const apkDownloadUrl = "https://github.com/khushal-jangid/toolbox-suite/releases/latest/download/ToolBox-v1.0.apk";
-  const webAppUrl = window.location.origin;
+  // GitHub Actions Artifacts / Release link
+  const apkDownloadUrl = "https://github.com/khushal-jangid/toolbox-suite/actions";
+  const repoReleasesUrl = "https://github.com/khushal-jangid/toolbox-suite/releases";
 
   const handleShare = () => {
     if (navigator.share) {
@@ -26,94 +27,108 @@ export default function DownloadAppPage({ onNavigate }) {
   };
 
   return (
-    <div className="max-w-[1100px] mx-auto px-4 md:px-8 py-8 space-y-10">
-      {/* Top Navigation */}
+    <div className="max-w-[1100px] mx-auto px-3 sm:px-6 md:px-8 py-6 sm:py-10 space-y-8 sm:space-y-12 bg-paper-grid min-h-screen">
+      
+      {/* Top Paper Header Bar */}
       <div className="flex items-center justify-between">
         <button
           onClick={() => onNavigate("home")}
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-black rounded-xl bg-yellow-300 text-slate-950 border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] hover:bg-yellow-400 transition active:scale-95"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-black rounded-xl bg-yellow-300 text-slate-950 border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-400 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition cursor-pointer"
         >
-          <ArrowLeft className="h-4 w-4" /> Back to Web Tools
+          <ArrowLeft className="h-4 w-4 stroke-[2.5]" /> Back to All Web Tools
         </button>
 
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-black rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] transition active:scale-95"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-black rounded-xl bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition cursor-pointer"
         >
-          {copied ? <Check className="h-4 w-4 text-emerald-600" /> : <Share2 className="h-4 w-4" />}
+          {copied ? <Check className="h-4 w-4 text-emerald-600 stroke-[3]" /> : <Share2 className="h-4 w-4" />}
           {copied ? "Link Copied!" : "Share App"}
         </button>
       </div>
 
-      {/* Main Hero Card */}
-      <section className="bg-[#fffbeb] dark:bg-[#1f1a14] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-6 sm:p-10 shadow-[6px_6px_0px_0px_#0f172a] dark:shadow-[6px_6px_0px_0px_#000] relative overflow-hidden bg-paper-dots">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      {/* Main Hero Paper Sheet */}
+      <section className="bg-[#fffbeb] dark:bg-[#1a160d] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-5 sm:p-10 shadow-[6px_6px_0px_0px_#0f172a] dark:shadow-[6px_6px_0px_0px_#000] relative overflow-hidden bg-paper-dots">
+        
+        {/* Paper Tape Sticker Decoration */}
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400/90 text-slate-900 px-6 py-1 text-[11px] font-black tracking-wider uppercase border-2 border-slate-900 shadow-xs rotate-1 z-20">
+          📌 OFFICIAL RELEASE v1.0.0
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-2">
           
-          {/* Left Column: Details & Download Button */}
-          <div className="lg:col-span-7 space-y-5 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-300 border-2 border-slate-900 shadow-[1.5px_1.5px_0px_0px_#0f172a] text-slate-950 text-xs font-black">
-              <span>📱 OFFICIAL ANDROID APK</span> • <span>v1.0.0</span>
+          {/* Left Column: Details & Tactile Buttons */}
+          <div className="lg:col-span-7 space-y-4 text-left">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500 text-white border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] text-xs font-black">
+              <span>📱 ANDROID APK</span> • <span>66+ OFFLINE TOOLS</span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white leading-tight">
-              Download <span className="bg-gradient-to-r from-rose-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent underline decoration-wavy decoration-yellow-400">ToolBox Suite</span> for Android
+            <h1 className="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white leading-[1.15]">
+              Get <span className="bg-yellow-300 text-slate-950 px-2 py-0.5 rounded-lg border-2 border-slate-900 inline-block shadow-[2px_2px_0px_0px_#0f172a] -rotate-1">ToolBox</span> on your Phone!
             </h1>
 
             <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              Carry 66+ lightning-fast client-side tools right in your pocket. Convert PDFs, compress photos, format code, and encrypt files completely offline with zero ads.
+              Carry the entire suite of <strong>66+ client-side tools</strong> on your Android phone. Convert PDFs, crop & compress images, format code, and calculate data securely with <strong>zero server uploads and zero ads</strong>.
             </p>
 
-            {/* Feature Pills */}
+            {/* Tactile Paper Badges */}
             <div className="flex flex-wrap gap-2 pt-1">
-              <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-lg text-xs font-black text-slate-900 dark:text-slate-100 shadow-[1.5px_1.5px_0px_0px_#0f172a]">
+              <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-xl text-xs font-black text-slate-900 dark:text-slate-100 shadow-[2px_2px_0px_0px_#0f172a]">
                 ✨ 100% Free Forever
               </span>
-              <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-lg text-xs font-black text-slate-900 dark:text-slate-100 shadow-[1.5px_1.5px_0px_0px_#0f172a]">
-                🔒 100% Private Offline
+              <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-xl text-xs font-black text-slate-900 dark:text-slate-100 shadow-[2px_2px_0px_0px_#0f172a]">
+                🔒 100% Private Client-Side
               </span>
-              <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-lg text-xs font-black text-slate-900 dark:text-slate-100 shadow-[1.5px_1.5px_0px_0px_#0f172a]">
-                ⚡ Size: ~12 MB
+              <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-xl text-xs font-black text-slate-900 dark:text-slate-100 shadow-[2px_2px_0px_0px_#0f172a]">
+                ⚡ Tiny Size: ~12 MB
               </span>
             </div>
 
-            {/* Direct Download Button */}
+            {/* Direct Download Call To Actions */}
             <div className="pt-3 flex flex-col sm:flex-row gap-3">
               <a
                 href={apkDownloadUrl}
-                download="ToolBox-v1.0.apk"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-white font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] transition active:translate-x-0.5 active:translate-y-0.5"
-              >
-                <Download className="h-6 w-6 stroke-[2.5]" />
-                <span>Download APK (Direct)</span>
-              </a>
-
-              <a
-                href="https://github.com/khushal-jangid/toolbox-suite/actions"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-bold text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 transition"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none transition"
               >
-                <span>View GitHub Releases ➔</span>
+                <Download className="h-6 w-6 stroke-[2.5]" />
+                <span>Download APK via GitHub</span>
               </a>
+
+              <button
+                onClick={() => {
+                  alert("To install directly in Chrome on Android: Tap the 3 dots (⋮) menu in Chrome > select Install App / Add to Home screen!");
+                }}
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition"
+              >
+                <span>📲 Instant Web Install</span>
+              </button>
             </div>
           </div>
 
-          {/* Right Column: Phone Mockup & QR Code */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center gap-4">
-            <div className="bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-3xl p-5 shadow-[4px_4px_0px_0px_#0f172a] text-center space-y-3 w-full max-w-[280px]">
-              <div className="flex items-center justify-center">
+          {/* Right Column: Paper QR Code Card Stamp */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
+            <div className="bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-3xl p-5 shadow-[5px_5px_0px_0px_#0f172a] text-center space-y-3 w-full max-w-[270px] transform rotate-1 hover:rotate-0 transition">
+              <div className="flex items-center justify-between border-b-2 border-dashed border-slate-300 dark:border-slate-700 pb-2">
+                <span className="text-[10px] font-black uppercase text-rose-500">QUICK SCAN</span>
+                <span className="text-[9px] font-mono font-bold text-slate-500">v1.0.0</span>
+              </div>
+              
+              <div className="flex items-center justify-center py-1">
                 <img
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(window.location.href)}`}
                   alt="Scan to Download APK"
-                  className="w-40 h-40 border-2 border-slate-900 rounded-2xl p-1 bg-white"
+                  className="w-36 h-36 border-2 border-slate-900 rounded-xl p-1 bg-white"
                 />
               </div>
-              <div>
-                <span className="text-xs font-black text-slate-900 dark:text-slate-100 block">
-                  Scan QR Code on Phone
+
+              <div className="bg-yellow-300 text-slate-950 p-2 rounded-xl border border-slate-900 shadow-xs">
+                <span className="text-xs font-black block">
+                  Scan from Phone Camera 📷
                 </span>
-                <span className="text-[10px] text-slate-500 font-medium">
-                  Point your camera to download directly
+                <span className="text-[9px] font-bold block opacity-90">
+                  Instantly open & install on mobile
                 </span>
               </div>
             </div>
@@ -122,68 +137,92 @@ export default function DownloadAppPage({ onNavigate }) {
         </div>
       </section>
 
-      {/* Step-by-Step Installation Guide */}
+      {/* Colorful 3-Step Sticky Notes Installation Guide */}
       <section className="space-y-6">
         <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white text-center">
-          📱 3 Simple Steps to Install on Android
+          📑 3 Easy Steps to Install ToolBox on Android
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Step 1 */}
-          <div className="bg-[#fff5f5] dark:bg-[#1a1218] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-6 shadow-[4px_4px_0px_0px_#0f172a] space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-rose-500 text-white font-black flex items-center justify-center text-lg border-2 border-slate-900 shadow-xs">
+          
+          {/* Step 1: Rose Note */}
+          <div className="bg-[#fff1f2] dark:bg-[#1f1216] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-5 sm:p-6 shadow-[4px_4px_0px_0px_#0f172a] space-y-3 transform -rotate-1 hover:rotate-0 transition">
+            <div className="w-10 h-10 rounded-xl bg-rose-500 text-white font-black flex items-center justify-center text-lg border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a]">
               1
             </div>
-            <h3 className="font-black text-base text-slate-900 dark:text-slate-100">Download the APK</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-              Tap the green <strong>"Download APK"</strong> button above to download the latest <code>.apk</code> package to your Android phone.
+            <h3 className="font-black text-base text-slate-900 dark:text-slate-100">
+              Download the APK
+            </h3>
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              Green button <strong>"Download APK"</strong> par click karein ya GitHub Artifacts se <code>app-debug.apk</code> download karein.
             </p>
           </div>
 
-          {/* Step 2 */}
-          <div className="bg-[#f0f9ff] dark:bg-[#0f1d2e] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-6 shadow-[4px_4px_0px_0px_#0f172a] space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center text-lg border-2 border-slate-900 shadow-xs">
+          {/* Step 2: Sky Blue Note */}
+          <div className="bg-[#f0f9ff] dark:bg-[#0f1d2e] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-5 sm:p-6 shadow-[4px_4px_0px_0px_#0f172a] space-y-3 transform rotate-1 hover:rotate-0 transition">
+            <div className="w-10 h-10 rounded-xl bg-sky-500 text-white font-black flex items-center justify-center text-lg border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a]">
               2
             </div>
-            <h3 className="font-black text-base text-slate-900 dark:text-slate-100">Allow Install</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-              Open your downloads folder, tap <code>ToolBox.apk</code>, and click <strong>"Allow from this source"</strong> if prompted by Android.
+            <h3 className="font-black text-base text-slate-900 dark:text-slate-100">
+              Allow Installation
+            </h3>
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              Downloaded file par tap karein. Agar phone <em>"Install from Unknown Source"</em> maange toh use <strong>Allow</strong> kar dein.
             </p>
           </div>
 
-          {/* Step 3 */}
-          <div className="bg-[#f0fdf4] dark:bg-[#0c2217] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-6 shadow-[4px_4px_0px_0px_#0f172a] space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center text-lg border-2 border-slate-900 shadow-xs">
+          {/* Step 3: Mint Green Note */}
+          <div className="bg-[#f0fdf4] dark:bg-[#0c2217] border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-5 sm:p-6 shadow-[4px_4px_0px_0px_#0f172a] space-y-3 transform -rotate-1 hover:rotate-0 transition">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500 text-white font-black flex items-center justify-center text-lg border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a]">
               3
             </div>
-            <h3 className="font-black text-base text-slate-900 dark:text-slate-100">Open & Enjoy</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-              Launch ToolBox Suite directly from your home screen. All 66+ tools work instantly with full client-side privacy!
+            <h3 className="font-black text-base text-slate-900 dark:text-slate-100">
+              Open App & Enjoy!
+            </h3>
+            <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
+              App icon aapki home screen par aa jayegi. Bina internet ke bhi saare 66 tools super-fast speed mein chalenge!
             </p>
           </div>
+
         </div>
       </section>
 
-      {/* Included Tools Overview */}
-      <section className="bg-white dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-6 sm:p-8 shadow-[4px_4px_0px_0px_#0f172a] space-y-4">
-        <h3 className="font-black text-lg text-slate-900 dark:text-white flex items-center gap-2">
-          <Sparkles className="h-5 w-5 text-yellow-500" /> What is included inside the Android App?
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-bold text-slate-700 dark:text-slate-300">
-          <div className="p-3 bg-rose-50 dark:bg-rose-950/40 rounded-xl border border-slate-900/30">
-            📄 <strong>25+ PDF Tools</strong> (Word, Excel, PPT, Compress, Sign, Split, OCR)
+      {/* Colorful Paper Feature Grid */}
+      <section className="bg-white dark:bg-slate-900 border-2 border-slate-900 dark:border-slate-700 rounded-3xl p-5 sm:p-8 shadow-[5px_5px_0px_0px_#0f172a] space-y-5">
+        <div className="flex items-center justify-between border-b-2 border-slate-900/30 dark:border-slate-800 pb-3">
+          <h3 className="font-black text-base sm:text-lg text-slate-900 dark:text-white flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-yellow-500" /> What is included inside the Android App?
+          </h3>
+          <span className="text-[10px] font-black bg-yellow-300 text-slate-950 px-2 py-0.5 rounded border border-slate-900">
+            66 UTILITIES
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs font-bold">
+          
+          <div className="p-3 bg-[#fff5f5] dark:bg-[#1a1218] rounded-2xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] space-y-1">
+            <span className="text-rose-600 dark:text-rose-400 font-black text-sm block">📄 PDF Suite</span>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">Word, Excel, PPT, Compress, Split, Merge, Rotate, Sign, Password</p>
           </div>
-          <div className="p-3 bg-sky-50 dark:bg-sky-950/40 rounded-xl border border-slate-900/30">
-            🖼️ <strong>15+ Image Tools</strong> (Compress, BG Remover, Crop, Resize, Watermark)
+
+          <div className="p-3 bg-[#f0f9ff] dark:bg-[#0f1d2e] rounded-2xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] space-y-1">
+            <span className="text-sky-600 dark:text-sky-400 font-black text-sm block">🖼️ Image Studio</span>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">Compress, BG Remover, Crop, Resize, Color Extractor, Watermark</p>
           </div>
-          <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-slate-900/30">
-            💻 <strong>12+ Dev Utilities</strong> (JSON, Code Formatter, QR, Base64, Hashes)
+
+          <div className="p-3 bg-[#f0fdf4] dark:bg-[#0c2217] rounded-2xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] space-y-1">
+            <span className="text-emerald-600 dark:text-emerald-400 font-black text-sm block">💻 Dev Utilities</span>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">JSON Formatter, QR Generator, Barcode, Base64, Code Minifiers</p>
           </div>
-          <div className="p-3 bg-purple-50 dark:bg-purple-950/40 rounded-xl border border-slate-900/30">
-            🔐 <strong>14+ Calculators & Security</strong> (AES Encryptor, Currencies, Age, Margins)
+
+          <div className="p-3 bg-[#faf5ff] dark:bg-[#1e1333] rounded-2xl border-2 border-slate-900 shadow-[2px_2px_0px_0px_#0f172a] space-y-1">
+            <span className="text-purple-600 dark:text-purple-400 font-black text-sm block">🔐 Security & Math</span>
+            <p className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">AES File Encryptor, Currencies, Password Generator, Age & GPA</p>
           </div>
+
         </div>
       </section>
+
     </div>
   );
 }
