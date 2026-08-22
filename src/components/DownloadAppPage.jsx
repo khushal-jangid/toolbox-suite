@@ -127,7 +127,7 @@ export default function DownloadAppPage({ onNavigate }) {
                 🔒 100% Private Client-Side
               </span>
               <span className="px-2.5 py-1 bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-xl text-xs font-black text-slate-900 dark:text-slate-100 shadow-[2px_2px_0px_0px_#0f172a]">
-                ⚡ Tiny Size: 4.75 MB
+                ⚡ Size: 26.2 MB
               </span>
             </div>
 
@@ -153,7 +153,7 @@ export default function DownloadAppPage({ onNavigate }) {
                 ) : (
                   <>
                     <Download className="h-6 w-6 stroke-[2.5]" />
-                    <span>Download APK (Direct 4.75 MB)</span>
+                    <span>Download APK (Direct 26.2 MB)</span>
                   </>
                 )}
               </button>
@@ -231,7 +231,7 @@ export default function DownloadAppPage({ onNavigate }) {
               Download the APK
             </h3>
             <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              Green button <strong>"Download APK"</strong> par click karein. <code>ToolBox-v1.0.apk</code> (4.75 MB) aapke phone par download ho jayegi.
+              Green button <strong>"Download APK"</strong> par click karein. <code>ToolBox-v1.0.apk</code> (26.2 MB) aapke phone par download ho jayegi.
             </p>
           </div>
 

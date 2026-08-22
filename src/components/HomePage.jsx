@@ -298,7 +298,7 @@ export default function HomePage({ onNavigate, activeCategoryFilter, favorites =
                   ✨ 100% Free
                 </span>
                 <span className="text-[11px] font-black bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-900 text-slate-900 dark:text-slate-100">
-                  ⚡ 4.75 MB
+                  ⚡ 26.2 MB
                 </span>
                 <span className="text-[11px] font-black bg-white dark:bg-slate-900 px-2 py-0.5 rounded-md border border-slate-900 text-slate-900 dark:text-slate-100">
                   🔒 No Server Uploads
@@ -311,7 +311,7 @@ export default function HomePage({ onNavigate, activeCategoryFilter, favorites =
                 onClick={() => onNavigate('download')}
                 className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition cursor-pointer"
               >
-                <span>📲 Download APK (4.75 MB)</span>
+                <span>📲 Download APK (26.2 MB)</span>
               </button>
               <button
                 onClick={() => onNavigate('download')}
