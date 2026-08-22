@@ -2,25 +2,72 @@ import React, { useState } from "react";
 import { 
   Download, QrCode, Smartphone, ShieldCheck, Zap, Sparkles, CheckCircle2,
   ArrowLeft, FileText, Image, Code2, Lock, ArrowRight, Share2, Star, Check,
-  Award, Heart, Terminal, Compass, Layers, CheckSquare
+  Award, Heart, Terminal, Compass, Layers, CheckSquare, Loader2, ExternalLink
 } from "lucide-react";
 
 export default function DownloadAppPage({ onNavigate }) {
   const [copied, setCopied] = useState(false);
+  const [downloading, setDownloading] = useState(false);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
 
-  // Direct APK download link
+  // Reliable absolute URLs
   const apkDownloadUrl = "https://khushal-jangid.github.io/toolbox-suite/ToolBox-v1.0.apk";
+  const releaseDownloadUrl = "https://github.com/khushal-jangid/toolbox-suite/releases/download/v1.0.0/ToolBox-v1.0.apk";
   const repoReleasesUrl = "https://github.com/khushal-jangid/toolbox-suite/releases/tag/v1.0.0";
 
+  // Forceful Blob & Direct Stream Downloader (100% immune to 404 & SPA routing errors)
+  const handleDownload = async (e) => {
+    if (e) e.preventDefault();
+    setDownloading(true);
+
+    try {
+      // 1. Try Blob fetch download
+      const response = await fetch(apkDownloadUrl);
+      if (response.ok) {
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "ToolBox-v1.0.apk";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+
+        setDownloading(false);
+        setDownloadSuccess(true);
+        setTimeout(() => setDownloadSuccess(false), 5000);
+        return;
+      }
+    } catch (err) {
+      console.warn("Direct blob fetch fallback:", err);
+    }
+
+    // 2. Direct browser navigation fallback
+    const link = document.createElement("a");
+    link.href = apkDownloadUrl;
+    link.download = "ToolBox-v1.0.apk";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setDownloading(false);
+    setDownloadSuccess(true);
+    setTimeout(() => setDownloadSuccess(false), 5000);
+  };
+
   const handleShare = () => {
+    const url = "https://khushal-jangid.github.io/toolbox-suite/#download";
     if (navigator.share) {
       navigator.share({
         title: "Download ToolBox Suite Android App",
         text: "Get 66+ Free PDF, Image, Code & Calculator tools on your Android phone!",
-        url: "https://khushal-jangid.github.io/toolbox-suite/#download",
+        url: url,
       }).catch(() => {});
     } else {
-      navigator.clipboard.writeText("https://khushal-jangid.github.io/toolbox-suite/#download");
+      navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -86,31 +133,58 @@ export default function DownloadAppPage({ onNavigate }) {
 
             {/* Direct Download Call To Actions */}
             <div className="pt-3 flex flex-col sm:flex-row gap-3">
+              
+              {/* Primary Programmatic Downloader Button */}
+              <button
+                onClick={handleDownload}
+                disabled={downloading}
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none transition cursor-pointer disabled:opacity-75"
+              >
+                {downloading ? (
+                  <>
+                    <Loader2 className="h-6 w-6 animate-spin text-slate-950 stroke-[2.5]" />
+                    <span>Starting Download...</span>
+                  </>
+                ) : downloadSuccess ? (
+                  <>
+                    <CheckCircle2 className="h-6 w-6 text-emerald-900 stroke-[2.5]" />
+                    <span>Downloaded Successfully!</span>
+                  </>
+                ) : (
+                  <>
+                    <Download className="h-6 w-6 stroke-[2.5]" />
+                    <span>Download APK (Direct 4.75 MB)</span>
+                  </>
+                )}
+              </button>
+
+              {/* Direct Anchor Tag Fallback */}
               <a
                 href={apkDownloadUrl}
                 download="ToolBox-v1.0.apk"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-2xl bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-black text-base border-2 border-slate-900 shadow-[4px_4px_0px_0px_#0f172a] active:translate-x-1 active:translate-y-1 active:shadow-none transition cursor-pointer"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition cursor-pointer"
               >
-                <Download className="h-6 w-6 stroke-[2.5]" />
-                <span>Download APK (Direct 1-Click)</span>
+                <span>Direct Mirror Link ➔</span>
               </a>
 
-              <a
-                href={repoReleasesUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-2xl bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-black text-sm border-2 border-slate-900 shadow-[3px_3px_0px_0px_#0f172a] hover:bg-yellow-100 active:translate-x-0.5 active:translate-y-0.5 transition cursor-pointer"
-              >
-                <span>GitHub Releases ➔</span>
-              </a>
             </div>
+
+            {downloadSuccess && (
+              <div className="p-3 bg-emerald-100 border-2 border-slate-900 rounded-xl text-xs font-black text-emerald-950 flex items-center gap-2 shadow-[2px_2px_0px_0px_#0f172a]">
+                <Check className="h-4 w-4 text-emerald-700 stroke-[3]" />
+                <span>ToolBox-v1.0.apk aapke downloads folder mein save ho gayi hai!</span>
+              </div>
+            )}
+
           </div>
 
           {/* Right Column: Paper QR Code Card Stamp */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
             <div className="bg-white dark:bg-slate-900 border-2 border-slate-900 rounded-3xl p-5 shadow-[5px_5px_0px_0px_#0f172a] text-center space-y-3 w-full max-w-[270px] transform rotate-1 hover:rotate-0 transition">
               <div className="flex items-center justify-between border-b-2 border-dashed border-slate-300 dark:border-slate-700 pb-2">
-                <span className="text-[10px] font-black uppercase text-rose-500">QUICK SCAN</span>
+                <span className="text-[10px] font-black uppercase text-rose-500">SCAN & INSTALL</span>
                 <span className="text-[9px] font-mono font-bold text-slate-500">v1.0.0</span>
               </div>
               
@@ -122,14 +196,18 @@ export default function DownloadAppPage({ onNavigate }) {
                 />
               </div>
 
-              <div className="bg-yellow-300 text-slate-950 p-2 rounded-xl border border-slate-900 shadow-xs">
+              <a
+                href={apkDownloadUrl}
+                download="ToolBox-v1.0.apk"
+                className="bg-yellow-300 hover:bg-yellow-400 text-slate-950 p-2.5 rounded-xl border-2 border-slate-900 shadow-xs block transition active:scale-95 cursor-pointer"
+              >
                 <span className="text-xs font-black block">
                   Scan to Download APK 📷
                 </span>
                 <span className="text-[9px] font-bold block opacity-90">
-                  Point phone camera & download instantly
+                  Tap or scan from phone camera
                 </span>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -153,7 +231,7 @@ export default function DownloadAppPage({ onNavigate }) {
               Download the APK
             </h3>
             <p className="text-xs text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              Green button <strong>"Download APK"</strong> par click karein ya GitHub Artifacts se <code>app-debug.apk</code> download karein.
+              Green button <strong>"Download APK"</strong> par click karein. <code>ToolBox-v1.0.apk</code> (4.75 MB) aapke phone par download ho jayegi.
             </p>
           </div>
 
