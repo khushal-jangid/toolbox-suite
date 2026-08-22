@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+*.local
+.vercel
+.DS_Store
+
+# Android build outputs
+android/.gradle
+android/build
+android/app/build
+android/.idea
+android/*.iml
+android/local.properties
+android/captures
+android/.cxx

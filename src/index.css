@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier Prime', monospace;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #faf7f2;
+  color: #18181b;
+}
+
+.dark body {
+  background-color: #0f141c;
+  color: #f8fafc;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Paper Grid pattern */
+.bg-paper-grid {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+.dark .bg-paper-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+/* Paper Dot Pattern */
+.bg-paper-dots {
+  background-size: 20px 20px;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+}
+
+.dark .bg-paper-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+}
+
+/* Tactile Paper Card & Shadow Utilities */
+.paper-card {
+  border: 2px solid #18181b;
+  box-shadow: 4px 4px 0px 0px #18181b;
+  border-radius: 1.25rem;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.dark .paper-card {
+  border: 2px solid #334155;
+  box-shadow: 4px 4px 0px 0px #020617;
+}
+
+.paper-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px 0px #18181b;
+}
+
+.dark .paper-card:hover {
+  box-shadow: 6px 6px 0px 0px #020617;
+}
+
+/* Paper Sticky Tape Badge */
+.paper-tape {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border: 1.5px solid #18181b;
+  border-radius: 9999px;
+  box-shadow: 2px 2px 0px 0px #18181b;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+}
+
+.dark .paper-tape {
+  border-color: #475569;
+  box-shadow: 2px 2px 0px 0px #0f172a;
+}
+
+/* Paper Button */
+.paper-btn {
+  border: 2px solid #18181b;
+  box-shadow: 3px 3px 0px 0px #18181b;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.dark .paper-btn {
+  border-color: #475569;
+  box-shadow: 3px 3px 0px 0px #020617;
+}
+
+.paper-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px 0px #18181b;
+}
+
+.dark .paper-btn:hover {
+  box-shadow: 4px 4px 0px 0px #020617;
+}
+
+.paper-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px 0px #18181b;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(156, 163, 175, 0.7);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(75, 85, 99, 0.5);
+}
+

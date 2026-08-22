@@ -1,0 +1,9 @@
+{
+  "appId": "com.khushaljangid.toolbox",
+  "appName": "ToolBox Suite",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  }
+}

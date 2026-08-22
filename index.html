@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToolBox — Free Web Utilities & Developer Tools by Khushal Jangid</title>
+    <meta name="description" content="40+ Free online developer, image, PDF, and text utility tools handcrafted by Khushal Jangid. 100% client-side privacy, zero server uploads, and no ads." />
+    <meta name="keywords" content="Khushal Jangid, ToolBox, free online tools, image compressor, pdf merger, qr generator, password generator, json formatter, background remover, unit converter, calculators, invoice generator, watermark" />
+    <meta name="author" content="Khushal Jangid" />
+
+    <!-- Google Search Engine Indexing Meta -->
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="canonical" href="https://toolbox-khushal.vercel.app/" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233525cd' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#3525cd" />
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:title" content="ToolBox — Handcrafted by Khushal Jangid" />
+    <meta property="og:description" content="100% Free, privacy-first online tools for image processing, PDF management, text manipulation, and web utilities by Khushal Jangid." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://toolbox-khushal.vercel.app/" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ToolBox by Khushal Jangid" />
+    <meta name="twitter:description" content="40+ Free web utility & developer tools running 100% in browser." />
+
+    <!-- Structured Data JSON-LD for Google Search -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ToolBox by Khushal Jangid",
+        "url": "https://toolbox-khushal.vercel.app/",
+        "author": {
+          "@type": "Person",
+          "name": "Khushal Jangid"
+        },
+        "description": "40+ Free online developer, image, PDF, and text utility tools handcrafted by Khushal Jangid."
+      }
+    </script>
+    
+    <!-- Preconnect Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Prevent Theme Flash -->
+    <script>
+      (function() {
+        const savedTheme = localStorage.getItem('omnitools_theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="bg-[#faf8ff] text-[#131b2e] dark:bg-[#0f172a] dark:text-slate-100 transition-colors duration-300 antialiased min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
