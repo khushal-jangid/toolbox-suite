@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
+import { initGlobalDownloadInterceptor } from './utils/globalDownloadInterceptor';
+
+// Initialize global download interceptor for Android & mobile downloads
+initGlobalDownloadInterceptor();
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
