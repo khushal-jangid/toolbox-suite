@@ -81,10 +81,7 @@ export default function PdfToPptTool() {
     });
 
     const blob = await zip.generateAsync({ type: 'blob' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${baseName}-powerpoint-slides.zip`;
-    a.click();
+    downloadFile(blob, `${baseName}-powerpoint-slides.zip`, 'application/zip');
   };
 
   return (

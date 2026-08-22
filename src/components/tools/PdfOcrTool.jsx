@@ -61,10 +61,7 @@ export default function PdfOcrTool() {
 
   const downloadTxt = () => {
     const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${file?.name.replace('.pdf', '')}-ocr.txt`;
-    a.click();
+    downloadFile(blob, `${file?.name.replace('.pdf', '')}-ocr.txt`, 'text/plain');
   };
 
   const copyText = () => {

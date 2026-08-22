@@ -70,11 +70,8 @@ export default function PdfToImageTool() {
   };
 
   const handleDownloadPage = (page) => {
-    const a = document.createElement('a');
-    a.href = page.dataUrl;
     const ext = format === 'image/png' ? 'png' : 'jpg';
-    a.download = `${file.name.replace('.pdf', '')}-page-${page.pageNum}.${ext}`;
-    a.click();
+    downloadFile(page.dataUrl, `${file.name.replace('.pdf', '')}-page-${page.pageNum}.${ext}`, `image/${ext === 'png' ? 'png' : 'jpeg'}`);
   };
 
   const handleDownloadAllZip = async () => {
@@ -91,10 +88,7 @@ export default function PdfToImageTool() {
       });
 
       const content = await zip.generateAsync({ type: 'blob' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(content);
-      a.download = `${baseName}-images.zip`;
-      a.click();
+      downloadFile(content, `${baseName}-images.zip`, 'application/zip');
       confetti({ particleCount: 60, spread: 60, origin: { y: 0.8 } });
     } catch (err) {
       alert('Error building ZIP file: ' + err.message);

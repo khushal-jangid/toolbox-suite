@@ -3,7 +3,7 @@ import { Filesystem, Directory } from '@capacitor/filesystem';
 import { Share } from '@capacitor/share';
 
 /**
- * Universal file downloader that works flawlessly on web, mobile and Android apps
+ * Universal file downloader that works flawlessly on web, mobile browsers, and native Android apps
  */
 export async function downloadFile(data, filename = 'document.pdf', mimeType = 'application/pdf') {
   if (!data) return false;
@@ -30,6 +30,14 @@ export async function downloadFile(data, filename = 'document.pdf', mimeType = '
           r.onerror = reject;
           r.readAsDataURL(data);
         });
+      } else if (data instanceof Uint8Array || data instanceof ArrayBuffer) {
+        const b = new Blob([data], { type: mimeType });
+        base64Data = await new Promise((resolve, reject) => {
+          const r = new FileReader();
+          r.onload = () => resolve(r.result.split(',')[1]);
+          r.onerror = reject;
+          r.readAsDataURL(b);
+        });
       }
 
       if (base64Data) {
@@ -37,6 +45,7 @@ export async function downloadFile(data, filename = 'document.pdf', mimeType = '
           path: filename,
           data: base64Data,
           directory: Directory.Cache,
+          recursive: true
         });
 
         await Share.share({
@@ -51,12 +60,12 @@ export async function downloadFile(data, filename = 'document.pdf', mimeType = '
     }
   }
 
-  // 2. Standard Web Browser Download
+  // 2. Standard Web Browser Download with MouseEvent Dispatch
   try {
     let url = data;
     let isCreatedUrl = false;
 
-    if (data instanceof Blob || data instanceof Uint8Array) {
+    if (data instanceof Blob || data instanceof Uint8Array || data instanceof ArrayBuffer) {
       const blob = data instanceof Blob ? data : new Blob([data], { type: mimeType });
       url = URL.createObjectURL(blob);
       isCreatedUrl = true;
@@ -65,14 +74,21 @@ export async function downloadFile(data, filename = 'document.pdf', mimeType = '
     const a = document.createElement('a');
     a.href = url;
     a.download = filename;
+    a.rel = 'noopener noreferrer';
     a.style.display = 'none';
     document.body.appendChild(a);
-    a.click();
+    
+    // Dispatch real mouse click event (never blocked by browser gesture policies)
+    try {
+      a.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+    } catch (e) {
+      a.click();
+    }
 
     setTimeout(() => {
       if (document.body.contains(a)) document.body.removeChild(a);
       if (isCreatedUrl) URL.revokeObjectURL(url);
-    }, 1500);
+    }, 30000);
 
     return true;
   } catch (err) {

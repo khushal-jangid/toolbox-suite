@@ -79,10 +79,7 @@ export default function PdfToExcelTool() {
     const baseName = file?.name.replace('.pdf', '') || 'spreadsheet';
     const csvContent = rows.map(r => r.map(c => `"${c.replace(/"/g, '""')}"`).join(',')).join('\n');
     const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${baseName}.csv`;
-    a.click();
+    downloadFile(blob, `${baseName}.csv`, 'text/csv');
   };
 
   return (

@@ -98,10 +98,7 @@ export default function PdfToWordTool() {
     `;
 
     const blob = new Blob(['\ufeff' + docHtml], { type: 'application/msword;charset=utf-8' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `${baseName}.doc`;
-    a.click();
+    downloadFile(blob, `${baseName}.doc`, 'application/msword');
   };
 
   const copyText = () => {
